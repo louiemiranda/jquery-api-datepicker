@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery UI Datepicker</title>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+
+    // var unavailableDates = ["2019-04-28","2019-05-16", "2019-05-13", "2019-05-21"];
+    // var jsonData = '["2019-04-25","2019-04-27","2019-04-29","2019-05-15","2019-05-21"]';
+    // var unavailableDates = JSON.parse(jsonData);
+    // console.log(unavailableDates);
+
+    var blockedDates = $.getJSON("http://localhost.test/jquery-api-datepicker/data.json", function (data, status) {
+      console.log("data:");
+      console.log(data);
+      
+      // var date = JSON.parse(data);
+      var date = JSON.parse(JSON.stringify(data));
+      console.log(date);
+
+      // var b = JSON.parse(JSON.stringify(products));
+      
+      // return date;
+    });
+
+    // console.log(blockedDates);
+
+    // var jqxhr = $.getJSON( "http://localhost.test/jquery-api-datepicker/data.json", function() {
+    //   console.log( "success" );
+    //   })
+
+    function checkBlockedDates(date) {
+        dmy = date.toISOString().split('T')[0];
+        
+        if ($.inArray(dmy, blockedDates) < 0) {
+            return [true, "", "Available"];
+        } else {
+            return [false, "", "Not Available"];
+        }
+    }
+
+    $( "#datepicker" ).datepicker({
+        minDate: 0,
+        constrainInput: true,
+        dateFormat: "yy-mm-dd",
+        beforeShowDay: checkBlockedDates
+    });
+
+
+    // var jqxhr = $.getJSON( "http://localhost.test/jquery-api-datepicker/data.json", function() {
+    //   console.log( "success" );
+    //   })
+    // .done(function() {
+    //   console.log( "second success" );
+    // })
+    // .fail(function() {
+    //   console.log( "error" );
+    // })
+    // .always(function() {
+    //   console.log( "complete" );
+    // });
+ 
+    // // Perform other work here ...
+    // console.log(jqxhr);
+ 
+    // // Set another completion function for the request above
+    // jqxhr.complete(function() {
+    //   console.log( "second complete" );
+    // });
+
+  } );
+  </script>
+</head>
+<body>
+ 
+<p>Date: <input type="text" id="datepicker"></p>
+ 
+ 
+</body>
+</html>
