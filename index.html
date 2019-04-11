@@ -30,9 +30,10 @@
       console.log(blockedDates);
       // console.log(blockedDates.responseJSON);
 
-        dmy = date.toISOString().split('T')[0];
+        // dmy = date.toISOString().split('T')[0];
+        ymd = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate();
         
-        if ($.inArray(dmy, blockedDates.responseJSON) < 0) {
+        if ($.inArray(ymd, blockedDates.responseJSON) < 0) {
             return [true, "", "Available"];
         } else {
             return [false, "", "Not Available"];
