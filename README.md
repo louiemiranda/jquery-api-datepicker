@@ -1,4 +1,4 @@
 # jquery-api-datepicker
 JQuery API Date Picker with Date Blocking
 
-![Preview](https://imgur.com/eFdjYYh)
+![Preview](http://i65.tinypic.com/23kubys.png)
