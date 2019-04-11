@@ -3,36 +3,20 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>jQuery UI Datepicker</title>
+  <title>jQuery API Datepicker with Date Blocking</title>
   <link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  
   <script>
   $( function() {
 
-    // var blockedDates = ["2019-04-28","2019-05-16", "2019-05-13", "2019-05-21"];
-    // var jsonData = '["2019-04-25","2019-04-27","2019-04-29","2019-05-15","2019-05-21"]';
-    // var blockedDates = JSON.parse(jsonData);
-    // console.log(unavailableDates);
-    
     var blockedDates = $.getJSON("http://localhost.test/jquery-api-datepicker/data.json", function (data, status) {
-      // console.log("data:");
-      // console.log(data);
-      
-      // var date = JSON.parse(data);
-      // var date = JSON.parse(JSON.stringify(data));
       JSON.parse(JSON.stringify(data));
-      // console.log(date);
     });
 
     function checkBlockedDates(date) {
-
-      console.log(blockedDates);
-      // console.log(blockedDates.responseJSON);
-
-        // dmy = date.toISOString().split('T')[0];
-        ymd = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate();
-        
+        ymd = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate();        
         if ($.inArray(ymd, blockedDates.responseJSON) < 0) {
             return [true, "", "Available"];
         } else {
@@ -51,6 +35,8 @@
   </script>
 </head>
 <body>
+
+  <h1>This is a jQuery API Datepicker with Date Blocking</h1>
  
 <p>Date: <input type="text" id="datepicker"></p>
  
