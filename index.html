@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery API Datepicker with Date Blocking</title>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  
+  <script>
+  $( function() {
+
+    var blockedDates = $.getJSON("http://localhost.test/jquery-api-datepicker/data.json", function (data, status) {
+      JSON.parse(JSON.stringify(data));
+    });
+
+    function checkBlockedDates(date) {
+        ymd = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate();        
+        if ($.inArray(ymd, blockedDates.responseJSON) < 0) {
+            return [true, "", "Available"];
+        } else {
+            return [false, "", "Not Available"];
+        }
+    }
+
+    $( "#datepicker" ).datepicker({
+        minDate: 0,
+        constrainInput: true,
+        dateFormat: "yy-mm-dd",
+        beforeShowDay: checkBlockedDates
+    });
+
+  } );
+  </script>
+</head>
+<body>
+
+  <h1>This is a jQuery API Datepicker with Date Blocking</h1>
+ 
+<p>Date: <input type="text" id="datepicker"></p>
+ 
+ 
+</body>
+</html>
