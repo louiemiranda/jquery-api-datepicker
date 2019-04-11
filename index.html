@@ -14,16 +14,15 @@
     // var jsonData = '["2019-04-25","2019-04-27","2019-04-29","2019-05-15","2019-05-21"]';
     // var blockedDates = JSON.parse(jsonData);
     // console.log(unavailableDates);
-
+    
     var blockedDates = $.getJSON("http://localhost.test/jquery-api-datepicker/data.json", function (data, status) {
       // console.log("data:");
       // console.log(data);
       
       // var date = JSON.parse(data);
-      var date = JSON.parse(JSON.stringify(data));
+      // var date = JSON.parse(JSON.stringify(data));
+      JSON.parse(JSON.stringify(data));
       // console.log(date);
-      
-      // return date.responseJSON;
     });
 
     function checkBlockedDates(date) {
