@@ -10,34 +10,30 @@
   <script>
   $( function() {
 
-    // var unavailableDates = ["2019-04-28","2019-05-16", "2019-05-13", "2019-05-21"];
+    // var blockedDates = ["2019-04-28","2019-05-16", "2019-05-13", "2019-05-21"];
     // var jsonData = '["2019-04-25","2019-04-27","2019-04-29","2019-05-15","2019-05-21"]';
-    // var unavailableDates = JSON.parse(jsonData);
+    // var blockedDates = JSON.parse(jsonData);
     // console.log(unavailableDates);
 
     var blockedDates = $.getJSON("http://localhost.test/jquery-api-datepicker/data.json", function (data, status) {
-      console.log("data:");
-      console.log(data);
+      // console.log("data:");
+      // console.log(data);
       
       // var date = JSON.parse(data);
       var date = JSON.parse(JSON.stringify(data));
-      console.log(date);
-
-      // var b = JSON.parse(JSON.stringify(products));
+      // console.log(date);
       
-      // return date;
+      // return date.responseJSON;
     });
 
-    // console.log(blockedDates);
-
-    // var jqxhr = $.getJSON( "http://localhost.test/jquery-api-datepicker/data.json", function() {
-    //   console.log( "success" );
-    //   })
-
     function checkBlockedDates(date) {
+
+      console.log(blockedDates);
+      // console.log(blockedDates.responseJSON);
+
         dmy = date.toISOString().split('T')[0];
         
-        if ($.inArray(dmy, blockedDates) < 0) {
+        if ($.inArray(dmy, blockedDates.responseJSON) < 0) {
             return [true, "", "Available"];
         } else {
             return [false, "", "Not Available"];
@@ -50,28 +46,6 @@
         dateFormat: "yy-mm-dd",
         beforeShowDay: checkBlockedDates
     });
-
-
-    // var jqxhr = $.getJSON( "http://localhost.test/jquery-api-datepicker/data.json", function() {
-    //   console.log( "success" );
-    //   })
-    // .done(function() {
-    //   console.log( "second success" );
-    // })
-    // .fail(function() {
-    //   console.log( "error" );
-    // })
-    // .always(function() {
-    //   console.log( "complete" );
-    // });
- 
-    // // Perform other work here ...
-    // console.log(jqxhr);
- 
-    // // Set another completion function for the request above
-    // jqxhr.complete(function() {
-    //   console.log( "second complete" );
-    // });
 
   } );
   </script>
